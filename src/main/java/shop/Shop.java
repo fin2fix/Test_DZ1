@@ -33,5 +33,4 @@ public class Shop {
         maxValue = this.products.stream().max(Comparator.comparing(Product::getCost)).get();
         return maxValue;
     }
-
 }

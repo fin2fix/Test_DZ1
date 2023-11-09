@@ -26,4 +26,22 @@ public class Product {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        // If the object is compared with itself then return true, if the Class is different then return false
+        if (obj == this) {
+            return true;
+        } else if (!(obj instanceof Product)) {
+            return false;
+        }
+        Product prod = (Product) obj;  // typecast o to Product so that we can compare data members
+        return this.cost.equals(prod.getCost()) && this.title.equals(prod.getTitle());
+    }
+
+    @Override
+    public String toString() {
+        return "Продукт " + this.title + "  Стоимостью: " + this.cost;
+    }
 }

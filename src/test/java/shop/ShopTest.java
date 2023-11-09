@@ -1,16 +1,10 @@
 package shop;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
+import org.junit.jupiter.api.*;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 /*
@@ -35,7 +29,7 @@ public class ShopTest {
         prod4 = new Product(650, "meat");
         prod5 = new Product(350, "chicken");
         newShop = new Shop(Arrays.asList(prod1, prod2, prod3, prod4, prod5));
-        }
+    }
 
     @AfterEach
     void tearDown() {
@@ -50,10 +44,20 @@ public class ShopTest {
     @Test
     @DisplayName("Проверка сортировки листа с продуктами")
     void sortProductsByPrice() {
-        List<Product> expected = Arrays.asList(prod4, prod5, prod3, prod1, prod2);
+        List<Product> expected = Arrays.asList(prod2, prod1, prod3, prod5, prod4);
         List<Product> actual = newShop.sortProductsByPrice();
-        //assertArrayEquals(expected, actual);  не знаю, как это решить ((( выдает ошибку
-    }
+        boolean flag = false;
+        if (expected.size() == actual.size()) {
+            for (int i = 0; i < expected.size(); i++) {
+                if (!(expected.get(i).equals(actual.get(i)))) {
+                    flag = false;
+                    break;
+                } else {
+                    flag = true;
+                }
+            }
+        }
+        assertThat(flag).isEqualTo(true);}
 
     @Test
     @DisplayName("Проверка поиска самого дорогого продукта")
@@ -61,6 +65,4 @@ public class ShopTest {
         assertEquals(prod4, newShop.getMostExpensiveProduct());
         // assertThat(newShop.getMostExpensiveProduct()).isEqualTo(prod4); // второй вариант решения
     }
-
-
 }
